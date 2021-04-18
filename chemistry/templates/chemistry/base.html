@@ -3,13 +3,50 @@
 <html>
 <head>
   <title> Электронный учебник по химии </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Добавление дополнительного статического CSS файла -->
+  {% load static %}
   <link rel="stylesheet" href="{% static 'css/chemistry.css' %}">
 </head>
+<body>
   <div class="header">
     <header>
-     Chemist
+      Chemist
     </header>
-</div>
-<body>
+  </div>
+  <div class="tab">
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Главная')" id="defaultOpen">Главная</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Алканы')">Алканы</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Циклоалканы')">Циклоалканы</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Алкены')">Алкены</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Алкины')">Алкины</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Алкадиены')">Алкадиены</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Фенолы')">Фенолы</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Спирты')">Спирты</button>
+    <button class="tablinks" onclick="openhydrocarbon(event, 'Альдегиды')">Альдегиды</button>
+	<button class="tablinks" onclick="openhydrocarbon(event, 'Карбоновые кислоты')">Карбоновые кислоты</button>
+  </div>
+  <div>
+    {% block content %}
+	{% endblock %}
+  </div>
+<script>
+function openhydrocarbon(evt, hydrocarbon) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(hydrocarbon).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 </body>
 </html>
